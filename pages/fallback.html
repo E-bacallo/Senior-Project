@@ -1,0 +1,47 @@
+<!--Fallback page for when/if a user tries to load an uncached page 
+    while they have no connection -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="#" />
+    <!-- viewport for Safari/IOS-->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="apple-touch-ico" href="/images/Bionet Icon 96x96.png">
+    <meta name="apple-mobile-web-app-status-bar" content="#0006aa">
+    <!--Materialize CSS Boilerplate-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link type="text/css" rel="stylesheet" href="/css/materialize.min.css"  media="screen,projection"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <link type="text/css" rel="stylesheet" href="/css/style.css"/>
+    <script type="text/javascript" src="/javascript/materialize.min.js"></script>
+    <link rel="manifest" type="application/manifest+json" href="/pages/manifest.webmanifest">
+    <meta name="theme-color" content="#0096FF"> <!--Be sure to add theme-color to all new pages-->
+    <title>BioNet</title>
+  </head>
+  <body class="grey lighten-4">
+    <nav class="z-depth-0">
+        <div class="nav-wrapper container">
+            <a class="subheader">Bionet</a>
+            <span class="right grey-text text-darken-1">
+                <i class="material-icons sidenav-trigger" data-target="side-menu">menu</i>
+            </span>
+        </div>
+    </nav>
+    <ul id="menu" class="sidenav side-menu">
+        <li><a class="subheader">Bionet</a></li>
+        <li><a href="/" class="waves-effect">Home</a></li>
+        <li><div class="divider"></div></li>
+        <!--<li><a href="/pages/" class="waves-effect>"> About/Contact/Bio Whatever</a></li> Add a Contact/About page-->
+      </ul>
+
+      <div class="container grey-text center">
+          <h4>Sorry!</h4>
+          <p>You cannot currently view this page while offline.</p>
+          <a href="/pages/index.html" class="btn-small blue">Return to Homepage</a>
+
+      </div>
+      <script src="/javascript/app.js"></script>
+      <script src="/javascript/userinterface.js"></script>
+  </body>
+  </html>

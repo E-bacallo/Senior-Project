@@ -3,7 +3,8 @@ const dynamicCache = 'dynamic-cache-v1';
 //Const to store page assets ready to cache.
 const pageAssets = [
 '/', 
-'/index.html', 
+'/pages/index.html',
+'/pages/fallback.html', 
 '/javascript/app.js', 
 '/javascript/userinterface.js', 
 '/javascript/materialize.min.js',
@@ -13,9 +14,10 @@ const pageAssets = [
 'https://fonts.gstatic.com/s/materialicons/v47/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIh8tQ.woff2'
 ];
 
-/*When installed, prompt console that it has been. 
-No need to reinstall on every install,
-only when SW changes. 
+/*
+    When installed, prompt console that it has been. 
+    No need to reinstall on every install,
+    only when SW changes. 
 */  
 self.addEventListener('install', evt => {
     //Create a new cache, and wait until it is finished to install the SW
@@ -28,28 +30,37 @@ self.addEventListener('install', evt => {
 });
 
 //Activate the Service Worker
+/*
+    On Activate, see if any assets (keys) 
+    are missing, download them and delete the old version 
+*/
 self.addEventListener('activate', evt => {
-    //On Activate, delete old cache and install new one.
     evt.waitUntil(
         caches.keys().then(keys =>{
-            return Promise.all(keys.filter(key => key != openCache)
+            return Promise.all(keys.filter(key => key != openCache && key !== dynamicCache)
             .map(key => caches.delete())
             )
         })
     );
 });
 
-//Look in the cache, and match requests to the assets.
+/*      
+    Match assets from the cache to the assets that are needed
+    to load the page. If the asset the user interacts 
+    with is in the cache, then return the response. 
+    If the asset is missing, add the needed asset to
+    the dynamic cache. If offline and cannot fetch page, return to
+    fallback page.
+*/
 self.addEventListener('fetch', evt =>{
     evt.respondWith(
-        caches.match(evt.request).then(cacheResponse => {
-            //Return the matching asset, or repeat the request.
+        caches.match(evt.request).then(cacheResponse => {   
             return cacheResponse || fetch(evt.request).then(fetchResponse => {
                 return caches.open(dynamicCache).then(cache => {
                     cache.put(evt.request.url, fetchResponse.clone());
                     return fetchResponse;
                 })
             });   
-        })
+        }).catch(() => caches.match('/pages/fallback.html'))
     );
 });
