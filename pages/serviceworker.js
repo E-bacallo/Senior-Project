@@ -15,6 +15,21 @@ const pageAssets = [
 ];
 
 /*
+    Recursive function to limit size of the cache by deleting 
+    the first item in the keys array 
+    if size is greater than specified.
+*/
+const limitCache = (name, size) => {
+    caches.open(name).then(cache => {
+        cache.keys().then(keys => {
+            if(keys.length > size){
+                cache.delete(keys[0]).then(limitCache(name, size))
+            }
+        })
+    })
+};
+
+/*
     When installed, prompt console that it has been. 
     No need to reinstall on every install,
     only when SW changes. 
@@ -49,8 +64,8 @@ self.addEventListener('activate', evt => {
     to load the page. If the asset the user interacts 
     with is in the cache, then return the response. 
     If the asset is missing, add the needed asset to
-    the dynamic cache. If offline and cannot fetch page, return to
-    fallback page.
+    the dynamic cache. If offline and missing resource is a page, 
+    send user to fallback page.
 */
 self.addEventListener('fetch', evt =>{
     evt.respondWith(
@@ -58,9 +73,14 @@ self.addEventListener('fetch', evt =>{
             return cacheResponse || fetch(evt.request).then(fetchResponse => {
                 return caches.open(dynamicCache).then(cache => {
                     cache.put(evt.request.url, fetchResponse.clone());
+                    limitCache(dynamicCache, 15);
                     return fetchResponse;
                 })
             });   
-        }).catch(() => caches.match('/pages/fallback.html'))
+        }).catch(() => {
+            if(evt.request.url.indexOf('.html') > -1){
+            caches.match('/pages/fallback.html')
+            }
+        })
     );
 });
