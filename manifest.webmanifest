@@ -1,7 +1,7 @@
 {
     "name": "Bionet",
     "short_name": "Bionet",
-    "start_url": "/pages/index.html",
+    "start_url": "/index.html",
     "display": "standalone",
     "background_color": "#0209D2",
     "theme_color": "#474DFF",

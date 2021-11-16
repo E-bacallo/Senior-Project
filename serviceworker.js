@@ -1,9 +1,9 @@
-const openCache = 'static-cache-v1';
-const dynamicCache = 'dynamic-cache-v1';
+const openCache = 'static-cache-v2';
+const dynamicCache = 'dynamic-cache-v2';
 //Const to store page assets ready to cache.
 const pageAssets = [
 '/', 
-'/pages/index.html',
+'/index.html',
 '/pages/fallback.html', 
 '/javascript/app.js', 
 '/javascript/userinterface.js', 
@@ -68,19 +68,21 @@ self.addEventListener('activate', evt => {
     send user to fallback page.
 */
 self.addEventListener('fetch', evt =>{
-    evt.respondWith(
-        caches.match(evt.request).then(cacheResponse => {   
-            return cacheResponse || fetch(evt.request).then(fetchResponse => {
-                return caches.open(dynamicCache).then(cache => {
-                    cache.put(evt.request.url, fetchResponse.clone());
-                    limitCache(dynamicCache, 15);
-                    return fetchResponse;
-                })
-            });   
-        }).catch(() => {
-            if(evt.request.url.indexOf('.html') > -1){
-            caches.match('/pages/fallback.html')
-            }
-        })
-    );
+    if(evt.request.url.indexOf('firestore.googleapis.com') === -1){
+        evt.respondWith(
+            caches.match(evt.request).then(cacheResponse => {   
+                return cacheResponse || fetch(evt.request).then(fetchResponse => {
+                    return caches.open(dynamicCache).then(cache => {
+                        cache.put(evt.request.url, fetchResponse.clone());
+                        limitCache(dynamicCache, 15);
+                        return fetchResponse;
+                    })
+                });   
+            }).catch(() => {
+                if(evt.request.url.indexOf('.html') > -1){
+                caches.match('/pages/fallback.html')
+                }
+            })
+        );
+    }
 });
