@@ -14,7 +14,7 @@ db.enablePersistence().catch(err => {
 /*
     Setting up the real time listener function
 */
-db.collection("proteins").onSnapshot((snapshot) => {
+db.collection('proteins').onSnapshot((snapshot) => {
     snapshot.docChanges().forEach(change =>{
         console.log(change, change.doc.data(), change.doc.id);
         if(change.type === 'added'){
@@ -25,4 +25,23 @@ db.collection("proteins").onSnapshot((snapshot) => {
             //remove the data from the page
         }
     });
-})
+});
+//Add New Item to DB
+const form = document.querySelector('form');
+form.addEventListener('submit', evt => {
+    evt.preventDefault();
+    const item = {
+        shortid: form.shortid.value,
+        name: form.name.value,
+        relatedid: form.relatedid.value,
+        relationpercent: form.relationpercent.value
+    };
+    db.collection('proteins').add(item)
+        .catch(err => console.log(err));
+    
+    form.shortid.value = '';
+    form.name.value = ''; 
+    form.relatedid.value = ''; 
+    form.relationpercent.value = '';
+    
+});

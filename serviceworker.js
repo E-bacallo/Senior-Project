@@ -1,5 +1,5 @@
 const openCache = 'static-cache-v2';
-const dynamicCache = 'dynamic-cache-v2';
+const dynamicCache = 'dynamic-cache-v9';
 //Const to store page assets ready to cache.
 const pageAssets = [
 '/', 
@@ -8,6 +8,7 @@ const pageAssets = [
 '/javascript/app.js', 
 '/javascript/userinterface.js', 
 '/javascript/materialize.min.js',
+'/javascript/database.js',
 '/css/style.css',
 '/css/materialize.min.css',
 'https://fonts.googleapis.com/icon?family=Material+Icons',
