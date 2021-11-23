@@ -1,5 +1,5 @@
-const openCache = 'static-cache-v2';
-const dynamicCache = 'dynamic-cache-v12';
+const openCache = 'static-cache-v3';
+const dynamicCache = 'dynamic-cache-v13';
 //Const to store page assets ready to cache.
 const pageAssets = [
 '/', 
