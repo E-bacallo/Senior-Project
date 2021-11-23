@@ -34,6 +34,7 @@ form.addEventListener('submit', evt => {
         shortid: form.shortid.value,
         name: form.name.value,
         relatedid: form.relatedid.value,
+        relatedname: form.relatedname.value,
         relationpercent: form.relationpercent.value
     };
     db.collection('proteins').add(item)

@@ -17,6 +17,7 @@ const updateItem = (data, id) => {
                 <div class="shortid">PRIMARY ID: ${data.shortid} </div>
                 <div class="name">NAME: ${data.name}</div>
                 <div class="relatedid">RELATED ID: ${data.relatedid} </div>
+                <div class="relatedname">RELATED ID: ${data.relatedname} </div>
                 <div class="relationpercent">RELATION PERCENT: ${data.relationpercent} </div>
             </div>
             <div class="deleteitem">

@@ -1,4 +1,4 @@
-﻿Nickname,Fullname,RelatedNickname,RelatedFullname,RelationPercentage
+﻿shortid,name,relatedid,relatedname,relationpercent
 TFC3,YAL001C,TFC1,YBR123C,0.989
 TFC3,YAL001C,TFC6,YDR362C,0.989
 TFC3,YAL001C,YRA1,YDR381W,0.303
