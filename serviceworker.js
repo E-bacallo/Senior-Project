@@ -20,15 +20,15 @@ const pageAssets = [
     the first item in the keys array 
     if size is greater than specified.
 */
-const limitCache = (name, size) => {
+function limitCache(name, size) {
     caches.open(name).then(cache => {
         cache.keys().then(keys => {
-            if(keys.length > size){
-                cache.delete(keys[0]).then(limitCache(name, size))
+            if (keys.length > size) {
+                cache.delete(keys[0]).then(limitCache(name, size));
             }
-        })
-    })
-};
+        });
+    });
+}
 
 /*
     When installed, prompt console that it has been. 

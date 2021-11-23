@@ -14,7 +14,7 @@ const updateItem = (data, id) => {
     const html = `
         <div class="card-panel item white row" data-id="${id}">
             <div class="description">
-                <div class="shortid">PRIMARY ID: ${data.shortid} </div>
+                <div class="ID">PRIMARY ID: ${data.shortid} </div>
                 <div class="name">NAME: ${data.name}</div>
                 <div class="relatedid">RELATED ID: ${data.relatedid} </div>
                 <div class="relatedname">RELATED ID: ${data.relatedname} </div>
