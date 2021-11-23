@@ -1,5 +1,6 @@
-const openCache = 'static-cache-v3';
-const dynamicCache = 'dynamic-cache-v13';
+const openCache = 'static-cache-v4';
+//Have to manually update cache numbers when making changes to caches
+const dynamicCache = 'dynamic-cache-v19';
 //Const to store page assets ready to cache.
 const pageAssets = [
 '/', 
@@ -20,7 +21,7 @@ const pageAssets = [
     the first item in the keys array 
     if size is greater than specified.
 */
-function limitCache(name, size) {
+const limitCache= (name, size) => {
     caches.open(name).then(cache => {
         cache.keys().then(keys => {
             if (keys.length > size) {

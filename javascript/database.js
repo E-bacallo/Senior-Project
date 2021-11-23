@@ -23,6 +23,7 @@ db.collection('proteins').onSnapshot((snapshot) => {
         }
         if(change.type === 'removed'){
             //remove the data from the page
+            removeItem(change.doc.id);
         }
     });
 });
@@ -45,4 +46,14 @@ form.addEventListener('submit', evt => {
     form.relatedid.value = ''; 
     form.relationpercent.value = '';
     
+});
+
+//Delete item from UI and DB
+const itemCont = document.querySelector('.items');
+itemCont.addEventListener('click', evt =>{
+    //console.log(evt);
+    if(evt.target.tagName === 'I'){
+        const id = evt.target.getAttribute('data-id');
+        db.collection('proteins').doc(id).delete();
+    }
 });

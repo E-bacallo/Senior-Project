@@ -27,3 +27,9 @@ const updateItem = (data, id) => {
     `;
     items.innerHTML += html;
 }
+
+//Remove Item from DB and UI
+const removeItem = (id) => {
+    const item = document.querySelector(`.item[data-id=${id}]`);
+    item.remove();
+}
