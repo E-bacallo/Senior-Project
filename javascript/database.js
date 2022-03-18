@@ -40,10 +40,11 @@ form.addEventListener('submit', evt => {
     };
     db.collection('proteins').add(item)
         .catch(err => console.log(err));
-    
+
     form.shortid.value = '';
     form.name.value = ''; 
     form.relatedid.value = ''; 
+    form.relatedname.value = '';
     form.relationpercent.value = '';
     
 });
@@ -51,9 +52,10 @@ form.addEventListener('submit', evt => {
 //Delete item from UI and DB
 const itemCont = document.querySelector('.items');
 itemCont.addEventListener('click', evt =>{
-    //console.log(evt);
     if(evt.target.tagName === 'I'){
-        const id = evt.target.getAttribute('data-id');
-        db.collection('proteins').doc(id).delete();
+        if(confirm("Are you sure you want to delete this entry?") == true){
+            const id = evt.target.getAttribute('data-id');
+            db.collection('proteins').doc(id).delete();
+        } else {}
     }
 });

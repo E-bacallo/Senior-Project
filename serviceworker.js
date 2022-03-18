@@ -1,6 +1,6 @@
-const openCache = 'static-cache-v4';
+const openCache = 'static-cache-v10';
 //Have to manually update cache numbers when making changes to caches
-const dynamicCache = 'dynamic-cache-v19';
+const dynamicCache = 'dynamic-cache-v25';
 //Const to store page assets ready to cache.
 const pageAssets = [
 '/', 

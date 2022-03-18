@@ -12,12 +12,12 @@ document.addEventListener('DOMContentLoaded', function(){
 //Update item function to update the data on the webpage from the database
 const updateItem = (data, id) => {
     const html = `
-        <div class="card-panel item white row" data-id="${id}">
+        <div class="card-panel item grey darken-2 row" data-id="${id}">
             <div class="description">
                 <div class="ID">PRIMARY ID: ${data.shortid} </div>
                 <div class="name">NAME: ${data.name}</div>
-                <div class="relatedID">RELATED NAME: ${data.relatedname} </div>
                 <div class="relatedID">RELATED ID: ${data.relatedid} </div>
+                <div class="relatedID">RELATED NAME: ${data.relatedname} </div>
                 <div class="relationpercent">RELATION PERCENT: ${data.relationpercent} </div>
             </div>
             <div class="deleteitem">
